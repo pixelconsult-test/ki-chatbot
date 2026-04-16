@@ -1,0 +1,37 @@
+# =============================================
+# KI Chatbot Widget - TypoScript Setup
+# =============================================
+
+# Render the ki_chatbot_widget CType using Fluid templates
+tt_content.ki_chatbot_widget = FLUIDTEMPLATE
+tt_content.ki_chatbot_widget {
+    templateName = KiChatbot
+    templateRootPaths.10 = EXT:ki_chatbot/Resources/Private/Templates/
+
+    settings {
+        baseUrl = {$plugin.tx_kichatbot.settings.baseUrl}
+        defaultPosition = {$plugin.tx_kichatbot.settings.defaultPosition}
+        defaultTheme = {$plugin.tx_kichatbot.settings.defaultTheme}
+    }
+
+    dataProcessing {
+    }
+}
+
+# =============================================
+# NOTE: Global chatbot embedding is handled by
+# the PSR-15 Middleware (ChatbotEmbedMiddleware)
+# which reads directly from Extension Configuration.
+# No TypoScript needed for global embedding.
+# =============================================
+
+# =============================================
+# Backend Module - View configuration
+# =============================================
+module.tx_kichatbot {
+    view {
+        templateRootPaths.0 = EXT:ki_chatbot/Resources/Private/Backend/Templates/
+        partialRootPaths.0 = EXT:ki_chatbot/Resources/Private/Backend/Partials/
+        layoutRootPaths.0 = EXT:ki_chatbot/Resources/Private/Backend/Layouts/
+    }
+}

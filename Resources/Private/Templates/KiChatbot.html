@@ -1,0 +1,88 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<!--
+    KI Chatbot Widget - Fluid Template
+    Renders the embed <script> tag for the my-chatify.de AI chatbot.
+
+    Available data fields (from tt_content):
+    - {data.tx_kichatbot_assistant_id}  : The chatbot assistant ID (required)
+    - {data.tx_kichatbot_base_url}      : Override base URL (optional)
+    - {data.tx_kichatbot_position}      : Widget position: "left" or "right"
+    - {data.tx_kichatbot_theme}         : Widget theme: "light" or "dark"
+    - {data.tx_kichatbot_auto_open}     : Auto-open on page load: 0 or 1
+
+    TypoScript settings:
+    - {settings.baseUrl}                : Default base URL from constants
+    - {settings.defaultPosition}        : Default position from constants
+    - {settings.defaultTheme}           : Default theme from constants
+-->
+
+<f:if condition="{data.tx_kichatbot_assistant_id}">
+    <f:then>
+        <!--
+            Determine the effective base URL:
+            Use the per-element override if set, otherwise fall back to TypoScript constant.
+        -->
+        <f:variable name="effectiveBaseUrl" value="{f:if(condition: data.tx_kichatbot_base_url, then: data.tx_kichatbot_base_url, else: settings.baseUrl)}" />
+
+        <!--
+            Determine position and theme:
+            The TCA fields have defaults, so these should always have values.
+        -->
+        <f:variable name="effectivePosition" value="{f:if(condition: data.tx_kichatbot_position, then: data.tx_kichatbot_position, else: settings.defaultPosition)}" />
+        <f:variable name="effectiveTheme" value="{f:if(condition: data.tx_kichatbot_theme, then: data.tx_kichatbot_theme, else: settings.defaultTheme)}" />
+
+        <!--
+            Build the query parameters.
+            Only add position/theme if they differ from defaults, and autoOpen if enabled.
+        -->
+        <f:variable name="queryParams" value="" />
+
+        <f:if condition="{effectivePosition} != 'right'">
+            <f:variable name="queryParams" value="position={effectivePosition}" />
+        </f:if>
+
+        <f:if condition="{effectiveTheme} != 'light'">
+            <f:if condition="{queryParams}">
+                <f:then>
+                    <f:variable name="queryParams" value="{queryParams}&theme={effectiveTheme}" />
+                </f:then>
+                <f:else>
+                    <f:variable name="queryParams" value="theme={effectiveTheme}" />
+                </f:else>
+            </f:if>
+        </f:if>
+
+        <f:if condition="{data.tx_kichatbot_auto_open}">
+            <f:if condition="{queryParams}">
+                <f:then>
+                    <f:variable name="queryParams" value="{queryParams}&autoOpen=true" />
+                </f:then>
+                <f:else>
+                    <f:variable name="queryParams" value="autoOpen=true" />
+                </f:else>
+            </f:if>
+        </f:if>
+
+        <!-- Build the final script URL -->
+        <f:variable name="scriptUrl" value="{effectiveBaseUrl}/api/embed/chat/{data.tx_kichatbot_assistant_id}" />
+
+        <f:if condition="{queryParams}">
+            <f:variable name="scriptUrl" value="{scriptUrl}?{queryParams}" />
+        </f:if>
+
+        <!-- Render the embed script tag -->
+        <!-- KI Chatbot Widget by my-chatify.de -->
+        <script src="{scriptUrl}" async="async"></script>
+
+    </f:then>
+    <f:else>
+        <!-- No assistant ID configured - show hint in backend preview only -->
+        <f:be.infobox title="KI Chatbot Widget" state="1">
+            Bitte geben Sie eine Chatbot Assistant-ID ein, um das Widget anzuzeigen.
+        </f:be.infobox>
+    </f:else>
+</f:if>
+
+</html>

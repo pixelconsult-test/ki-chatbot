@@ -1,0 +1,2 @@
+# cat=basic/enable; type=string; label=Assistant ID: Your Chatbot Assistant ID from the my-chatify.de dashboard (e.g. 3f8a900503fed)
+assistantId =

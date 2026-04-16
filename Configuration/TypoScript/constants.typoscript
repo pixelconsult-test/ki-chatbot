@@ -1,0 +1,24 @@
+# =============================================
+# KI Chatbot Widget - TypoScript Constants
+# These defaults are overridden by ext_localconf.php
+# with values from Extension Configuration.
+# =============================================
+
+plugin.tx_kichatbot {
+    settings {
+        # cat=KI Chatbot/general/005; type=string; label=Assistant ID: Your Chatbot Assistant ID
+        assistantId =
+
+        # cat=KI Chatbot/general/006; type=boolean; label=Enable globally: Embed chatbot on all pages
+        enableGlobal = 1
+
+        # cat=KI Chatbot/general/010; type=string; label=Base URL: The base URL of your my-chatify.de instance (without trailing slash)
+        baseUrl = https://my-chatify.de
+
+        # cat=KI Chatbot/general/020; type=options[right,left]; label=Default Position: Default widget position
+        defaultPosition = right
+
+        # cat=KI Chatbot/general/030; type=options[light,dark]; label=Default Theme: Default widget theme
+        defaultTheme = light
+    }
+}

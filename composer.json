@@ -1,0 +1,27 @@
+{
+    "name": "pixelconsult/ki-chatbot",
+    "type": "typo3-cms-extension",
+    "description": "Embed the my-chatify.de AI chatbot widget on your TYPO3 website",
+    "license": "GPL-2.0-or-later",
+    "keywords": ["TYPO3", "chatbot", "AI", "widget", "embed"],
+    "authors": [
+        {
+            "name": "PixelConsult",
+            "email": "info@pixelconsult.de",
+            "homepage": "https://pixelconsult.de"
+        }
+    ],
+    "require": {
+        "typo3/cms-core": "^11.5 || ^12.4 || ^13.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pixelconsult\\KiChatbot\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "ki_chatbot"
+        }
+    }
+}

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2026-02-13T00:00:00Z" product-name="ki_chatbot">
+        <header/>
+        <body>
+            <trans-unit id="tt_content.CType.ki_chatbot_widget" resname="tt_content.CType.ki_chatbot_widget">
+                <source>KI Chatbot (My-Chatify)</source>
+                <target>KI Chatbot (My-Chatify)</target>
+            </trans-unit>
+
+            <!-- Assistant ID -->
+            <trans-unit id="tt_content.tx_kichatbot_assistant_id" resname="tt_content.tx_kichatbot_assistant_id">
+                <source>Chatbot Assistant ID</source>
+                <target>Chatbot Assistenten-ID</target>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_assistant_id.description" resname="tt_content.tx_kichatbot_assistant_id.description">
+                <source>Enter the unique Assistant ID from your my-chatify.de dashboard. Example: 3f8a900503fed</source>
+                <target>Geben Sie die eindeutige Assistenten-ID aus Ihrem my-chatify.de Dashboard ein. Beispiel: 3f8a900503fed</target>
+            </trans-unit>
+
+            <!-- Base URL -->
+            <trans-unit id="tt_content.tx_kichatbot_base_url" resname="tt_content.tx_kichatbot_base_url">
+                <source>Base URL (optional)</source>
+                <target>Basis-URL (optional)</target>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_base_url.description" resname="tt_content.tx_kichatbot_base_url.description">
+                <source>Override the default chatbot server URL. Leave empty to use the default (https://my-chatify.de).</source>
+                <target>Überschreibt die Standard-Chatbot-Server-URL. Leer lassen für Standard (https://my-chatify.de).</target>
+            </trans-unit>
+
+            <!-- Position -->
+            <trans-unit id="tt_content.tx_kichatbot_position" resname="tt_content.tx_kichatbot_position">
+                <source>Widget Position</source>
+                <target>Widget-Position</target>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_position.right" resname="tt_content.tx_kichatbot_position.right">
+                <source>Right (default)</source>
+                <target>Rechts (Standard)</target>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_position.left" resname="tt_content.tx_kichatbot_position.left">
+                <source>Left</source>
+                <target>Links</target>
+            </trans-unit>
+
+            <!-- Theme -->
+            <trans-unit id="tt_content.tx_kichatbot_theme" resname="tt_content.tx_kichatbot_theme">
+                <source>Widget Theme</source>
+                <target>Widget-Design</target>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_theme.light" resname="tt_content.tx_kichatbot_theme.light">
+                <source>Light (default)</source>
+                <target>Hell (Standard)</target>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_theme.dark" resname="tt_content.tx_kichatbot_theme.dark">
+                <source>Dark</source>
+                <target>Dunkel</target>
+            </trans-unit>
+
+            <!-- Auto Open -->
+            <trans-unit id="tt_content.tx_kichatbot_auto_open" resname="tt_content.tx_kichatbot_auto_open">
+                <source>Auto-open widget on page load</source>
+                <target>Widget beim Seitenaufruf automatisch öffnen</target>
+            </trans-unit>
+
+            <!-- Tab label -->
+            <trans-unit id="tt_content.tab.chatbot_settings" resname="tt_content.tab.chatbot_settings">
+                <source>Chatbot Settings</source>
+                <target>Chatbot Einstellungen</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

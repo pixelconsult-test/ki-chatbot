@@ -11,31 +11,29 @@
     - {data.tx_kichatbot_position}      : Widget position: "left" or "right"
     - {data.tx_kichatbot_theme}         : Widget theme: "light" or "dark"
     - {data.tx_kichatbot_auto_open}     : Auto-open on page load: 0 or 1
+    - {data.tx_kichatbot_language}      : Language: "auto", "de", "en", "fr", "es", "it", "nl"
 
     TypoScript settings:
     - {settings.baseUrl}                : Default base URL from constants
     - {settings.defaultPosition}        : Default position from constants
     - {settings.defaultTheme}           : Default theme from constants
+    - {settings.defaultLanguage}        : Default language from constants
 -->
 
 <f:if condition="{data.tx_kichatbot_assistant_id}">
     <f:then>
         <!--
-            Determine the effective base URL:
+            Determine the effective values:
             Use the per-element override if set, otherwise fall back to TypoScript constant.
         -->
         <f:variable name="effectiveBaseUrl" value="{f:if(condition: data.tx_kichatbot_base_url, then: data.tx_kichatbot_base_url, else: settings.baseUrl)}" />
-
-        <!--
-            Determine position and theme:
-            The TCA fields have defaults, so these should always have values.
-        -->
         <f:variable name="effectivePosition" value="{f:if(condition: data.tx_kichatbot_position, then: data.tx_kichatbot_position, else: settings.defaultPosition)}" />
         <f:variable name="effectiveTheme" value="{f:if(condition: data.tx_kichatbot_theme, then: data.tx_kichatbot_theme, else: settings.defaultTheme)}" />
+        <f:variable name="effectiveLanguage" value="{f:if(condition: data.tx_kichatbot_language, then: data.tx_kichatbot_language, else: settings.defaultLanguage)}" />
 
         <!--
-            Build the query parameters.
-            Only add position/theme if they differ from defaults, and autoOpen if enabled.
+            Build the query parameters (position, theme, autoOpen).
+            Language is only added here for fixed languages; auto-mode handles lang in JS.
         -->
         <f:variable name="queryParams" value="" />
 
@@ -65,16 +63,53 @@
             </f:if>
         </f:if>
 
-        <!-- Build the final script URL -->
+        <!-- For fixed languages: append lang param to queryParams -->
+        <f:if condition="{effectiveLanguage} != 'auto'">
+            <f:if condition="{queryParams}">
+                <f:then>
+                    <f:variable name="queryParams" value="{queryParams}&lang={effectiveLanguage}" />
+                </f:then>
+                <f:else>
+                    <f:variable name="queryParams" value="lang={effectiveLanguage}" />
+                </f:else>
+            </f:if>
+        </f:if>
+
+        <!-- Build the base script URL (without lang for auto-mode) -->
         <f:variable name="scriptUrl" value="{effectiveBaseUrl}/api/embed/chat/{data.tx_kichatbot_assistant_id}" />
 
         <f:if condition="{queryParams}">
             <f:variable name="scriptUrl" value="{scriptUrl}?{queryParams}" />
         </f:if>
 
-        <!-- Render the embed script tag -->
-        <!-- KI Chatbot Widget by my-chatify.de -->
-        <script src="{scriptUrl}" async="async"></script>
+        <!-- Render: auto-mode uses JS detection, fixed language uses a static script tag -->
+        <f:if condition="{effectiveLanguage} == 'auto'">
+            <f:then>
+                <!-- KI Chatbot Widget by my-chatify.de – auto language detection -->
+                <script>
+                (function () {
+                    var supportedLangs = ['de', 'en', 'fr', 'es', 'it', 'nl'];
+                    var currentLang = document.documentElement.lang
+                        ? document.documentElement.lang.substring(0, 2).toLowerCase()
+                        : 'de';
+                    var chatbotLang = supportedLangs.indexOf(currentLang) !== -1 ? currentLang : 'de';
+                    var params = [];
+                    <f:if condition="{effectivePosition} != 'right'">params.push('position={effectivePosition}');</f:if>
+                    <f:if condition="{effectiveTheme} != 'light'">params.push('theme={effectiveTheme}');</f:if>
+                    <f:if condition="{data.tx_kichatbot_auto_open}">params.push('autoOpen=true');</f:if>
+                    params.push('lang=' + chatbotLang);
+                    var s = document.createElement('script');
+                    s.src = '{effectiveBaseUrl}/api/embed/chat/{data.tx_kichatbot_assistant_id}' + (params.length ? '?' + params.join('&') : '');
+                    s.async = true;
+                    document.body.appendChild(s);
+                }());
+                </script>
+            </f:then>
+            <f:else>
+                <!-- KI Chatbot Widget by my-chatify.de -->
+                <script src="{scriptUrl}" async="async"></script>
+            </f:else>
+        </f:if>
 
     </f:then>
     <f:else>
@@ -86,3 +121,4 @@
 </f:if>
 
 </html>
+

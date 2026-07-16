@@ -21,6 +21,7 @@ class KiChatbotPreviewRenderer extends StandardContentPreviewRenderer
         $position = $record['tx_kichatbot_position'] ?? 'right';
         $theme = $record['tx_kichatbot_theme'] ?? 'light';
         $autoOpen = (bool)($record['tx_kichatbot_auto_open'] ?? false);
+        $language = $record['tx_kichatbot_language'] ?? 'auto';
 
         if (empty($assistantId)) {
             return '<div style="padding:10px;color:#c00;font-weight:bold;">
@@ -45,6 +46,17 @@ class KiChatbotPreviewRenderer extends StandardContentPreviewRenderer
         $html .= '<td>' . htmlspecialchars(ucfirst($theme)) . '</td></tr>';
         $html .= '<tr><td style="padding-right:10px;color:#666;">Auto-Open:</td>';
         $html .= '<td>' . ($autoOpen ? '✅ Ja' : '❌ Nein') . '</td></tr>';
+        $languageLabels = [
+            'auto' => '🌐 Automatisch (Seiten-Sprache)',
+            'de' => '🇩🇪 Deutsch',
+            'en' => '🇬🇧 English',
+            'fr' => '🇫🇷 Français',
+            'es' => '🇪🇸 Español',
+            'it' => '🇮🇹 Italiano',
+            'nl' => '🇳🇱 Nederlands',
+        ];
+        $html .= '<tr><td style="padding-right:10px;color:#666;">Sprache:</td>';
+        $html .= '<td>' . htmlspecialchars($languageLabels[$language] ?? $language) . '</td></tr>';
         $html .= '</table>';
         $html .= '</div>';
 

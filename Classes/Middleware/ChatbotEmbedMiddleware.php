@@ -54,23 +54,57 @@ class ChatbotEmbedMiddleware implements MiddlewareInterface
         $baseUrl = rtrim(trim($config['baseUrl'] ?? 'https://my-chatify.de'), '/');
         $position = trim($config['defaultPosition'] ?? 'right');
         $theme = trim($config['defaultTheme'] ?? 'light');
+        $language = trim($config['defaultLanguage'] ?? 'de');
 
-        $scriptUrl = $baseUrl . '/api/embed/chat/' . htmlspecialchars($assistantId);
+        // Validate language against allowed values
+        $allowedLanguages = ['auto', 'de', 'en', 'fr', 'es', 'it', 'nl'];
+        if (!in_array($language, $allowedLanguages, true)) {
+            $language = 'de';
+        }
 
-        // Build query parameters
+        $scriptUrl = $baseUrl . '/api/embed/chat/' . htmlspecialchars($assistantId, ENT_QUOTES, 'UTF-8');
+
+        // Build query parameters (excluding lang for auto-mode)
         $params = [];
         if ($position && $position !== 'right') {
-            $params[] = 'position=' . htmlspecialchars($position);
+            $params[] = 'position=' . htmlspecialchars($position, ENT_QUOTES, 'UTF-8');
         }
         if ($theme && $theme !== 'light') {
-            $params[] = 'theme=' . htmlspecialchars($theme);
-        }
-        if (!empty($params)) {
-            $scriptUrl .= '?' . implode('&', $params);
+            $params[] = 'theme=' . htmlspecialchars($theme, ENT_QUOTES, 'UTF-8');
         }
 
-        $scriptTag = "\n<!-- KI Chatbot Widget by my-chatify.de -->\n"
-            . '<script src="' . $scriptUrl . '" async></script>' . "\n";
+        if ($language === 'auto') {
+            // Auto-detect: output an inline JS block that reads document.documentElement.lang
+            if (!empty($params)) {
+                $staticParams = implode('&', $params);
+            } else {
+                $staticParams = '';
+            }
+            $scriptTag = "\n<!-- KI Chatbot Widget by my-chatify.de -->\n"
+                . "<script>\n"
+                . "(function () {\n"
+                . "    var supportedLangs = ['de', 'en', 'fr', 'es', 'it', 'nl'];\n"
+                . "    var currentLang = document.documentElement.lang\n"
+                . "        ? document.documentElement.lang.substring(0, 2).toLowerCase()\n"
+                . "        : 'de';\n"
+                . "    var chatbotLang = supportedLangs.indexOf(currentLang) !== -1 ? currentLang : 'de';\n"
+                . "    var params = " . json_encode($staticParams ? explode('&', $staticParams) : [], JSON_UNESCAPED_UNICODE) . ";\n"
+                . "    params.push('lang=' + chatbotLang);\n"
+                . "    var s = document.createElement('script');\n"
+                . "    s.src = '" . addslashes($scriptUrl) . "' + (params.length ? '?' + params.join('&') : '');\n"
+                . "    s.async = true;\n"
+                . "    document.body.appendChild(s);\n"
+                . "}());\n"
+                . "</script>\n";
+        } else {
+            // Fixed language: append lang param to URL
+            $params[] = 'lang=' . htmlspecialchars($language, ENT_QUOTES, 'UTF-8');
+            if (!empty($params)) {
+                $scriptUrl .= '?' . implode('&', $params);
+            }
+            $scriptTag = "\n<!-- KI Chatbot Widget by my-chatify.de -->\n"
+                . '<script src="' . $scriptUrl . '" async></script>' . "\n";
+        }
 
         // Get the current HTML body
         $body = $response->getBody();

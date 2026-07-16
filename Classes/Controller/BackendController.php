@@ -24,11 +24,26 @@ class BackendController extends ActionController
     {
         $config = $this->getExtensionConfig();
         $assistantId = trim((string)($config['assistantId'] ?? ''));
+        $rawLang = trim((string)($config['defaultLanguage'] ?? ''));
+        $allowedLanguages = ['auto', 'de', 'en', 'fr', 'es', 'it', 'nl'];
+        $defaultLanguage = (in_array($rawLang, $allowedLanguages, true) && $rawLang !== '') ? $rawLang : 'de';
+
+        $languageOptions = [
+            'de'   => 'Deutsch (DE) - Standard',
+            'auto' => 'Automatisch - Seitensprache erkennen',
+            'en'   => 'English (EN)',
+            'fr'   => 'Francais (FR)',
+            'es'   => 'Espanol (ES)',
+            'it'   => 'Italiano (IT)',
+            'nl'   => 'Nederlands (NL)',
+        ];
 
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
         $moduleTemplate->assignMultiple([
             'assistantId' => $assistantId,
             'isConfigured' => !empty($assistantId),
+            'defaultLanguage' => $defaultLanguage,
+            'languageOptions' => $languageOptions,
         ]);
 
         return $moduleTemplate->renderResponse('Backend/Index');
@@ -38,10 +53,16 @@ class BackendController extends ActionController
     {
         $arguments = $this->request->getArguments();
         $assistantId = trim((string)($arguments['assistantId'] ?? ''));
+        $allowedLanguages = ['auto', 'de', 'en', 'fr', 'es', 'it', 'nl'];
+        $defaultLanguage = trim((string)($arguments['defaultLanguage'] ?? 'de'));
+        if (!in_array($defaultLanguage, $allowedLanguages, true)) {
+            $defaultLanguage = 'de';
+        }
 
         try {
             $current = $this->getExtensionConfig();
             $current['assistantId'] = $assistantId;
+            $current['defaultLanguage'] = $defaultLanguage;
 
             GeneralUtility::makeInstance(ExtensionConfiguration::class)->set('ki_chatbot', $current);
 

@@ -1,2 +1,5 @@
 # cat=basic/enable; type=string; label=Assistant ID: Your Chatbot Assistant ID from the my-chatify.de dashboard (e.g. 3f8a900503fed)
 assistantId =
+
+# cat=basic/enable; type=options[de,auto,en,fr,es,it,nl]; label=Default Language: Language for the chat widget interface. 'auto' detects the page language from the HTML lang attribute and loads the widget accordingly.
+defaultLanguage = de

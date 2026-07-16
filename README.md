@@ -31,14 +31,6 @@ composer require pixelconsult/ki-chatbot
 
 > **Note:** On TYPO3 v12+ the TypoScript is included automatically.
 
-### 2. (Optional) Configure TypoScript Constants
-In the **Constant Editor** (category: **KI Chatbot**) you can set:
-
-| Constant | Default | Description |
-|---|---|---|
-| `plugin.tx_kichatbot.settings.baseUrl` | `https://my-chatify.de` | Chatbot server URL |
-| `plugin.tx_kichatbot.settings.defaultPosition` | `right` | Default widget position |
-| `plugin.tx_kichatbot.settings.defaultTheme` | `light` | Default widget theme |
 
 ## Usage
 
@@ -46,20 +38,16 @@ In the **Constant Editor** (category: **KI Chatbot**) you can set:
 2. Click **"+ Content"** to add a new content element
 3. Select **"KI Chatbot Widget"** (under the "Special" tab)
 4. Enter your **Chatbot Assistant ID** (e.g., `3f8a900503fed`)
-   - You can find this ID in your [my-chatify.de dashboard](https://my-chatify.de/dashboard)
-5. Optionally configure:
-   - **Base URL** – Override the default server (leave empty for `https://my-chatify.de`)
-   - **Widget Position** – Left or Right
-   - **Widget Theme** – Light or Dark
-   - **Auto-open** – Automatically open the chat when the page loads
-6. **Save** and view the page – the floating chatbot button will appear!
+   - You can find this ID in your [my-chatify.de dashboard](https://my-chatify.de/dashboard/chatbots)
+
+5. **Save** and view the page – the floating chatbot button will appear!
 
 ## What It Does
 
 The extension renders a single `<script>` tag on your page:
 
 ```html
-<script src="https://my-chatify.de/api/embed/chat/YOUR_ASSISTANT_ID?position=right&theme=light" async></script>
+<script src="https://my-chatify.de/api/embed/chat/YOUR_ASSISTANT_ID" async></script>
 ```
 
 This script:

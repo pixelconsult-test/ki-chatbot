@@ -35,6 +35,18 @@
 
             <p style="margin: 8px 0 0; font-size: 12px; color: #9ca3af;">Die ID finden Sie in Ihrem <a href="https://my-chatify.de" target="_blank" style="color: #e81184;">my-chatify.de</a> Dashboard. Das Embed-Script wird automatisch eingebunden: <code style="background: #f8e8da; padding:1px 5px; border-radius:3px; font-size:11px;">https://my-chatify.de/api/embed/chat/<strong>IHRE_ID</strong></code></p>
 
+            <div style="margin-top: 20px; border-top: 1px solid #f0e0e8; padding-top: 20px;">
+                <label for="defaultLanguage" style="display: block; font-weight: 600; color: #374151; margin-bottom: 8px; font-size: 15px;">Widget-Sprache / Language</label>
+                <f:form.select name="defaultLanguage" id="defaultLanguage" value="{defaultLanguage}"
+                    options="{languageOptions}"
+                    additionalAttributes="{style: 'padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px; outline-color: #e81184; width: 100%; max-width: 500px;'}" />
+                <p style="margin: 6px 0 0; font-size: 12px; color: #9ca3af;">
+                    <strong>Automatisch</strong>: Der Chatbot l&auml;dt sich in der Sprache des Besuchers
+                    (aus <code style="background:#f8e8da;padding:1px 4px;border-radius:3px;">html lang=""</code>).
+                    Unterst&uuml;tzt: <code style="background:#f8e8da;padding:1px 4px;border-radius:3px;">de, en, fr, es, it, nl</code> &ndash; Fallback: Deutsch.
+                </p>
+            </div>
+
         </f:form>
 
     </div>

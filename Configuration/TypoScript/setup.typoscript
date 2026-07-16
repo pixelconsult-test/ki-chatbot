@@ -12,6 +12,7 @@ tt_content.ki_chatbot_widget {
         baseUrl = {$plugin.tx_kichatbot.settings.baseUrl}
         defaultPosition = {$plugin.tx_kichatbot.settings.defaultPosition}
         defaultTheme = {$plugin.tx_kichatbot.settings.defaultTheme}
+        defaultLanguage = {$plugin.tx_kichatbot.settings.defaultLanguage}
     }
 
     dataProcessing {

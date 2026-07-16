@@ -62,6 +62,44 @@
                 <target>Widget beim Seitenaufruf automatisch öffnen</target>
             </trans-unit>
 
+            <!-- Language -->
+            <trans-unit id="tt_content.tx_kichatbot_language" resname="tt_content.tx_kichatbot_language">
+                <source>Widget Language</source>
+                <target>Widget-Sprache</target>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_language.description" resname="tt_content.tx_kichatbot_language.description">
+                <source>Language for the chat interface. 'Auto' detects the visitor's language from the page HTML lang attribute (de/en/fr/es/it/nl). Falls back to German if the language is not supported.</source>
+                <target>Sprache der Chat-Oberfläche. 'Auto' erkennt die Besucher-Sprache automatisch aus dem HTML-lang-Attribut der Seite (de/en/fr/es/it/nl). Fallback: Deutsch.</target>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_language.auto" resname="tt_content.tx_kichatbot_language.auto">
+                <source>Auto (detect from page language)</source>
+                <target>Automatisch (Seitensprache erkennen)</target>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_language.de" resname="tt_content.tx_kichatbot_language.de">
+                <source>Deutsch</source>
+                <target>Deutsch</target>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_language.en" resname="tt_content.tx_kichatbot_language.en">
+                <source>English</source>
+                <target>English</target>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_language.fr" resname="tt_content.tx_kichatbot_language.fr">
+                <source>Français</source>
+                <target>Français</target>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_language.es" resname="tt_content.tx_kichatbot_language.es">
+                <source>Español</source>
+                <target>Español</target>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_language.it" resname="tt_content.tx_kichatbot_language.it">
+                <source>Italiano</source>
+                <target>Italiano</target>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_language.nl" resname="tt_content.tx_kichatbot_language.nl">
+                <source>Nederlands</source>
+                <target>Nederlands</target>
+            </trans-unit>
+
             <!-- Tab label -->
             <trans-unit id="tt_content.tab.chatbot_settings" resname="tt_content.tab.chatbot_settings">
                 <source>Chatbot Settings</source>

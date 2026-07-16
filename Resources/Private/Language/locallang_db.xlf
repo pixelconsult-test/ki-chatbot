@@ -50,6 +50,35 @@
                 <source>Auto-open widget on page load</source>
             </trans-unit>
 
+            <!-- Language -->
+            <trans-unit id="tt_content.tx_kichatbot_language" resname="tt_content.tx_kichatbot_language">
+                <source>Widget Language</source>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_language.description" resname="tt_content.tx_kichatbot_language.description">
+                <source>Language for the chat interface. 'Auto' detects the visitor's language from the page HTML lang attribute (de/en/fr/es/it/nl). Falls back to German if the language is not supported.</source>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_language.auto" resname="tt_content.tx_kichatbot_language.auto">
+                <source>Auto (detect from page language)</source>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_language.de" resname="tt_content.tx_kichatbot_language.de">
+                <source>Deutsch</source>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_language.en" resname="tt_content.tx_kichatbot_language.en">
+                <source>English</source>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_language.fr" resname="tt_content.tx_kichatbot_language.fr">
+                <source>Français</source>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_language.es" resname="tt_content.tx_kichatbot_language.es">
+                <source>Español</source>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_language.it" resname="tt_content.tx_kichatbot_language.it">
+                <source>Italiano</source>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_kichatbot_language.nl" resname="tt_content.tx_kichatbot_language.nl">
+                <source>Nederlands</source>
+            </trans-unit>
+
             <!-- Tab label -->
             <trans-unit id="tt_content.tab.chatbot_settings" resname="tt_content.tab.chatbot_settings">
                 <source>Chatbot Settings</source>

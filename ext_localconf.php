@@ -35,4 +35,14 @@ defined('TYPO3') or die();
             'plugin.tx_kichatbot.settings.assistantId = ' . $extensionConfiguration['assistantId']
         );
     }
+
+    if (!empty($extensionConfiguration['defaultLanguage'])) {
+        $allowedLanguages = ['auto', 'de', 'en', 'fr', 'es', 'it', 'nl'];
+        $lang = trim($extensionConfiguration['defaultLanguage']);
+        if (in_array($lang, $allowedLanguages, true)) {
+            \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptConstants(
+                'plugin.tx_kichatbot.settings.defaultLanguage = ' . $lang
+            );
+        }
+    }
 })();

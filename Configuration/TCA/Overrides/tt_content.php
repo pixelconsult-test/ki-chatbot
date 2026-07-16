@@ -30,6 +30,7 @@ defined('TYPO3') or die();
                 tx_kichatbot_base_url,
                 tx_kichatbot_position,
                 tx_kichatbot_theme,
+                tx_kichatbot_language,
                 tx_kichatbot_auto_open,
             --div--;LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.access,
                 hidden,
@@ -105,6 +106,25 @@ defined('TYPO3') or die();
                     ],
                 ],
                 'default' => 0,
+            ],
+        ],
+        'tx_kichatbot_language' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:ki_chatbot/Resources/Private/Language/locallang_db.xlf:tt_content.tx_kichatbot_language',
+            'description' => 'LLL:EXT:ki_chatbot/Resources/Private/Language/locallang_db.xlf:tt_content.tx_kichatbot_language.description',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['LLL:EXT:ki_chatbot/Resources/Private/Language/locallang_db.xlf:tt_content.tx_kichatbot_language.auto', 'auto'],
+                    ['LLL:EXT:ki_chatbot/Resources/Private/Language/locallang_db.xlf:tt_content.tx_kichatbot_language.de', 'de'],
+                    ['LLL:EXT:ki_chatbot/Resources/Private/Language/locallang_db.xlf:tt_content.tx_kichatbot_language.en', 'en'],
+                    ['LLL:EXT:ki_chatbot/Resources/Private/Language/locallang_db.xlf:tt_content.tx_kichatbot_language.fr', 'fr'],
+                    ['LLL:EXT:ki_chatbot/Resources/Private/Language/locallang_db.xlf:tt_content.tx_kichatbot_language.es', 'es'],
+                    ['LLL:EXT:ki_chatbot/Resources/Private/Language/locallang_db.xlf:tt_content.tx_kichatbot_language.it', 'it'],
+                    ['LLL:EXT:ki_chatbot/Resources/Private/Language/locallang_db.xlf:tt_content.tx_kichatbot_language.nl', 'nl'],
+                ],
+                'default' => 'de',
             ],
         ],
     ];

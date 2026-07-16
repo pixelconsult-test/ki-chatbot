@@ -20,5 +20,8 @@ plugin.tx_kichatbot {
 
         # cat=KI Chatbot/general/030; type=options[light,dark]; label=Default Theme: Default widget theme
         defaultTheme = light
+
+        # cat=KI Chatbot/general/040; type=options[auto,de,en,fr,es,it,nl]; label=Default Language: Widget interface language. 'auto' detects visitor language from page HTML lang attribute.
+        defaultLanguage = de
     }
 }
